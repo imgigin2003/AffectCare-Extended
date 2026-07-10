@@ -1,0 +1,17 @@
+# venv
+ML-Backend/src/venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# model artifacts / data (adjust to taste)
+*.pth
+*.pkl
+data/processed/*.npy
+
+*node_modules/
+ML-Backend/data/.DS_Store
+ML-Backend/data/processed/y.npy
+ML-Backend/data/processed/X.npy
+.DS_Store
