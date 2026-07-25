@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm public/",
+    "prebuild": "cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm public/",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
