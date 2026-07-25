@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export const PORT = process.env.PORT || 5001;
+export const PORT = process.env.PORT || 7860;
 
 // Root of the repo (backend/src/config → three levels up)
 export const REPO_ROOT = path.resolve(__dirname, "..", "..", "..");

@@ -40,6 +40,14 @@ ENV PYTHON_BIN=python3
 # Expose the port
 EXPOSE 5001
 
+# Create a non-root user for Hugging Face Spaces
+RUN useradd -m -u 1000 user
+USER user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
+
+WORKDIR /app
+
 # Start the application
 WORKDIR /app/backend
 CMD ["node", "server.js"]

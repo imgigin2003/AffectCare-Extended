@@ -28,6 +28,7 @@ app.use((err, req, res, next) => {
     .json({ error: err.message || "Internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`AffectCare backend listening on http://localhost:${PORT}`);
+const port = process.env.PORT || 7860;
+app.listen(port, "0.0.0.0", () => {
+  console.log(`AffectCare backend listening on port ${port}`);
 });
