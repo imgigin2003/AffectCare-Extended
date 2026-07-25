@@ -33,12 +33,12 @@ COPY . .
 RUN mkdir -p backend/uploads
 
 # Set environment variables
-ENV PORT=5001
+ENV PORT=8000
 ENV NODE_ENV=production
 ENV PYTHON_BIN=python3
 
 # Expose the port
-EXPOSE 5001
+EXPOSE 8000
 
 # Create a non-root user for Hugging Face Spaces
 RUN useradd -m -u 1000 user
@@ -49,5 +49,5 @@ ENV HOME=/home/user \
 WORKDIR /app
 
 # Start the application
-WORKDIR /app/backend
-CMD ["node", "server.js"]
+WORKDIR /app/ML-Backend
+CMD ["python3", "app.py"]
