@@ -39,7 +39,17 @@ export function useRecorder() {
   const start = useCallback(async () => {
     setError(null);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Disable the browser's default mic processing — auto-gain-control in
+      // particular boosts quiet speech to full volume, which this "loud = distress"
+      // model then misreads. We want the raw signal, like the training clips.
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false,
+          channelCount: 1,
+        },
+      });
       streamRef.current = stream;
       chunksRef.current = [];
 
