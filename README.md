@@ -84,5 +84,5 @@ The browser reproduces the Python model to **~1e-7**. What you see in the browse
 
 # 🧠 The ML core
 
-- Refer to the main Repo
+> Refer to the main Repo
 ### 🎙️ [AffectCare](https://github.com/imgigin2003/AffectCare)
