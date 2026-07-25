@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "postinstall": "cd ../ML-Backend && python3 -m venv venv && ./venv/bin/pip install -r src/requirements.txt"
+    "build": "echo 'No build step for backend'"
   },
   "dependencies": {
     "cors": "^2.8.5",

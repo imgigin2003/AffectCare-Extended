@@ -9,8 +9,7 @@ export const PORT = process.env.PORT || 5001;
 export const REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 export const ML_DIR = path.join(REPO_ROOT, "ML-Backend");
-export const PYTHON_BIN =
-  process.env.PYTHON_BIN || path.join(ML_DIR, "src", "venv", "bin", "python");
+export const PYTHON_BIN = process.env.PYTHON_BIN || "python3";
 export const PREDICT_SCRIPT = path.join(ML_DIR, "predict_api.py");
 export const VISUALIZE_SCRIPT = path.join(ML_DIR, "visualize_api.py");
 

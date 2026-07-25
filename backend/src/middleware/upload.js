@@ -3,7 +3,9 @@ import path from "path";
 import fs from "fs";
 import { UPLOAD_DIR } from "../config/config.js";
 
-fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+}
 
 const ALLOWED_EXTENSIONS = [".wav", ".mp3"];
 
