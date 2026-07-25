@@ -9,3 +9,4 @@ __pycache__/
 *node_modules/
 ML-Backend/data/.DS_Store
 .DS_Store
+frontend/public/ort-wasm-simd-threaded.wasm
