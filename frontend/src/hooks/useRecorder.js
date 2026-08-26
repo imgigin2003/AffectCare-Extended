@@ -1,5 +1,4 @@
 import { useRef, useState, useCallback } from 'react';
-import { encodeWav } from '../utils/wav';
 
 // Records microphone audio as raw PCM via the Web Audio API and returns a
 // ready-to-send WAV Blob on stop. We capture PCM directly (instead of using
@@ -97,7 +96,7 @@ export function useRecorder() {
     }
     chunksRef.current = [];
 
-    return encodeWav(merged, sampleRate);
+    return [merged, sampleRate];
   }, [cleanup]);
 
   return { isRecording, seconds, error, start, stop };

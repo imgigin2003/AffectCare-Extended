@@ -20,6 +20,23 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState('');
   const fileInputRef = useRef(null);
 
+  const workerRef = useRef(null);
+  useEffect(() => {
+    workerRef.current = new Worker(
+	    new URL("./utils/wav.js", import.meta.url),
+	    { type: "module" },
+    );
+
+    workerRef.current.onmessage = (e) => {
+      if (!e.data) {
+        setErrorMsg('Recording was empty — try again and speak into the mic.');
+        setStatus('error');
+        return;
+      }
+      setClip(e.data, `recording-${new Date().toLocaleTimeString()}.wav`);
+    };
+  }, []);
+
   // On refresh the browser drops in-memory blobs automatically — nothing
   // persists to disk here, and the backend deletes its copy after scoring.
   // We just revoke object URLs when they're replaced or the app unmounts.
@@ -50,13 +67,7 @@ export default function App() {
 
   const handleStopRecording = () => {
     try {
-      const wav = recorder.stop();
-      if (!wav) {
-        setErrorMsg('Recording was empty — try again and speak into the mic.');
-        setStatus('error');
-        return;
-      }
-      setClip(wav, `recording-${new Date().toLocaleTimeString()}.wav`);
+      workerRef.current.postMessage(recorder.stop());
     } catch {
       setErrorMsg('Could not process the recording.');
       setStatus('error');
