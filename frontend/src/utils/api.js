@@ -6,7 +6,7 @@ import { renderSpectrogram } from './spectrogram';
 
 // WASM is served from the site root (bundled into /public); single-threaded so
 // no cross-origin-isolation headers are required on the host.
-ort.env.wasm.wasmPaths = '/';
+ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@dev/dist/';
 ort.env.wasm.numThreads = 1;
 
 const THRESHOLD = 0.15;
