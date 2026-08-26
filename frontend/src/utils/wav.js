@@ -1,7 +1,10 @@
 // Encodes mono Float32 PCM samples into a 16-bit PCM WAV Blob.
 // The Python pipeline uses librosa/soundfile, which reads WAV natively and
 // resamples on load — so we can encode at the recorder's own sample rate.
-export function encodeWav(samples, sampleRate) {
+onmessage = function (e) {
+  const samples = e.data[0];
+  const sampleRate = e.data[1];
+
   const buffer = new ArrayBuffer(44 + samples.length * 2);
   const view = new DataView(buffer);
 
@@ -29,5 +32,5 @@ export function encodeWav(samples, sampleRate) {
     view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
   }
 
-  return new Blob([view], { type: 'audio/wav' });
+  postMessage(new Blob([view], { type: 'audio/wav' }));
 }
