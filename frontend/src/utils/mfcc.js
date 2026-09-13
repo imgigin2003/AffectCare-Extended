@@ -111,7 +111,7 @@ function melBasis(sr) {
 
 // ---- librosa.effects.trim(y, top_db=18, frame_length=2048, hop_length=512) ----
 // Removes leading/trailing frames whose RMS is > top_db below the loudest frame.
-export function trimSilence(audio, topDb = 18, frameLength = 2048, hop = 512) {
+export function trimSilence(audio, topDb = 45, frameLength = 2048, hop = 512) {
   const pad = frameLength >> 1; // center=True zero-pad
   const padded = new Float32Array(audio.length + 2 * pad);
   padded.set(audio, pad);

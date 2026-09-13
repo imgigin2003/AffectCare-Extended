@@ -30,7 +30,7 @@ export async function decodeToMono22k(blob) {
 // pipeline the Python model was trained on (validated to ~1e-6 vs librosa).
 export async function clipToMFCC(blob) {
   const audio = await decodeToMono22k(blob);
-  const trimmed = trimSilence(audio, 18);
+  const trimmed = trimSilence(audio, 45);
   const fixed = fixLength(trimmed, TARGET);
   return computeMFCC(fixed, SR, 13);
 }

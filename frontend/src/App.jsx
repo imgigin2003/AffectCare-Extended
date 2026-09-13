@@ -158,7 +158,7 @@ export default function App() {
           <input
             ref={fileInputRef}
             type="file"
-            accept=".wav,.mp3,audio/wav,audio/mpeg"
+            accept=".wav,.mp3,.flac,audio/wav,audio/mpeg,audio/flac"
             onChange={handleFile}
             hidden
           />

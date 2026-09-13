@@ -25,7 +25,7 @@ def load_and_format(filepath, sr=22050, target_seconds=4, n_mfcc=13):
     # trimming it returns a cleaned audio AND the indices it cut at
     # top_db=18 means anything quieter than 18 decibels gets removed.
     # we might have a whispered groan, so we set this with caution.
-    audio_trimmed, _ = librosa.effects.trim(audio, top_db=18)
+    audio_trimmed, _ = librosa.effects.trim(audio, top_db=45)
     # The _ variable: The second return value is the trim indices [start, end].
     # We discard it with _ because we only need the cleaned audio itself.
 
@@ -54,7 +54,7 @@ def load_and_format(filepath, sr=22050, target_seconds=4, n_mfcc=13):
 def build_dataset(dataset_path, sr=22050, target_seconds=4, n_mfcc=13):
     X = []  # features — each item will be shape (1, 13, 173)
     y = []  # labels  — 1 for distress, 0 for normal
-    supported_formats = [".mp3", ".wav"]
+    supported_formats = [".mp3", ".wav", ".flac"]
 
     # folder name IS the label — no need to read the file to know
     label_map = {"distress": 1, "normal": 0}

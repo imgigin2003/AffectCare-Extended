@@ -1,5 +1,5 @@
 # venv
-ML-Backend/src/venv/
+ML-Backend/venv/
 
 # python cache
 __pycache__/
@@ -8,5 +8,6 @@ __pycache__/
 
 *node_modules/
 ML-Backend/data/.DS_Store
+ML-Backend/dataset
 .DS_Store
 frontend/public/ort-wasm-simd-threaded.wasm

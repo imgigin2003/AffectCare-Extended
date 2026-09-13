@@ -124,7 +124,34 @@ def evaluate_model(model, X_test, y_test, threshold=0.2):
 
 if __name__ == "__main__":
     model, X_test, y_test, scaler, loss_history = train_model()
-    evaluate_model(model, X_test, y_test, threshold=0.15)
+    recall, cm = evaluate_model(model, X_test, y_test, threshold=0.15)
+    
+    # Calculate precision and F1
+    model.eval()
+    with torch.no_grad():
+        test_preds = (torch.sigmoid(model(X_test)) >= 0.15).float()
+    precision = precision_score(y_test, test_preds)
+    f1 = f1_score(y_test, test_preds)
+    
+    # Save metrics.json for the frontend Insights tab
+    metrics = {
+        "threshold": 0.15,
+        "test_size": int(len(y_test)),
+        "recall": float(recall),
+        "precision": float(precision),
+        "f1": float(f1),
+        "confusion_matrix": {
+            "true_negative": int(cm[0][0]),
+            "false_positive": int(cm[0][1]),
+            "false_negative": int(cm[1][0]),
+            "true_positive": int(cm[1][1])
+        }
+    }
+    
+    import os
+    os.makedirs("../results", exist_ok=True)
+    with open("../results/metrics.json", "w") as f:
+        json.dump(metrics, f, indent=2)
 
     with open("loss_history.json", "w") as f:
         json.dump(loss_history, f)
@@ -138,4 +165,4 @@ if __name__ == "__main__":
     with open("scaler.pkl", "wb") as f:
         pickle.dump(scaler, f)
 
-    print("Model and scaler saved.")
+    print("Model, metrics, and scaler saved.")
