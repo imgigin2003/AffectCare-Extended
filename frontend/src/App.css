@@ -388,7 +388,8 @@
 /* Stat tiles */
 .tiles {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, 1fr) — lets tiles shrink instead of forcing horizontal overflow on mobile */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -401,6 +402,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  min-width: 0; /* allow the grid to shrink this item below its content width */
 }
 
 .tile-accent {
@@ -427,7 +429,7 @@
 /* Viz cards */
 .viz-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   align-items: start; /* don't stretch cards to equal height — kills empty gaps */
 }
@@ -450,7 +452,8 @@
 /* Confusion matrix */
 .cm {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  /* minmax(0, 1fr) keeps the matrix cells inside the card on narrow screens */
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.4rem;
   align-items: stretch;
 }
@@ -603,6 +606,61 @@
 /* Two-up layout on wider screens */
 @media (min-width: 560px) {
   .viz-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 559px) {
+  .app {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .header {
+    margin-bottom: 1.25rem;
+  }
+
+  .brand h1 {
+    font-size: 1.2rem;
+  }
+
+  .panel {
+    padding: 1.5rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  /* Tabs stretch across the row — easier to tap, no cramped fit-content pill */
+  .tabs {
+    width: 100%;
+  }
+
+  .tab {
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Stack the three stat tiles full-width so nothing gets squeezed or cut off */
+  .tiles {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tile-value {
+    font-size: 1.35rem;
+  }
+
+  /* Confusion matrix: tighter cells so row labels + 2 columns fit narrow screens */
+  .cm {
+    gap: 0.35rem;
+  }
+
+  .cm-cell {
+    padding: 0.7rem 0.35rem;
+    min-height: 68px;
+  }
+
+  .cm-count {
+    font-size: 1.25rem;
   }
 }

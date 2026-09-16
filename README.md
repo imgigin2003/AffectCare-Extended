@@ -54,6 +54,7 @@ Final model, threshold = 0.15, evaluated on a held-out 20% test split (~800 file
 | F1 Score                    | 85.94%     |
 
 **Confusion Matrix**
+
 - **True Positives**: 364
 - **True Negatives**: 315
 - **False Positives**: 83
@@ -70,7 +71,7 @@ These metrics are available interactively in the web application's **Insights** 
 | Class      | Source                                                                                                                                                                             |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `distress` | Human scream / distress vocalization clips sourced from a Kaggle audio dataset [Human Scream Dataset](https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset) |
-| `normal`   | [ESC-50: Dataset for Environmental Sound Classification](https://github.com/karolpiczak/ESC-50) (ambient/household/urban sounds) + LibriSpeech + supplementary calm speech clips                 |
+| `normal`   | [ESC-50: Dataset for Environmental Sound Classification](https://github.com/karolpiczak/ESC-50) (ambient/household/urban sounds) + LibriSpeech + supplementary calm speech clips   |
 
 ### A real finding, not a footnote: the siren confusion
 
@@ -117,7 +118,9 @@ AffectCare-Extended/
 ## ⚙️ Installation & usage
 
 ### 1. Run the Web App (Frontend)
+
 The web app requires no Python. Simply run it via Node/NPM:
+
 ```bash
 cd frontend
 npm install
@@ -125,6 +128,7 @@ npm run dev
 ```
 
 ### 2. Retrain the Model (Backend)
+
 If you wish to retrain the model on new data, you must use **Python 3.10** (to ensure `llvmlite` and `numba` dependencies compile correctly on older machines).
 
 ```bash
@@ -135,6 +139,7 @@ pip install -r requirements.txt
 ```
 
 **Retraining Process:**
+
 ```bash
 cd src
 python3 preprocessing.py   # extracts MFCCs from dataset/, saves to data/processed/
